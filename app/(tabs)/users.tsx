@@ -1,5 +1,4 @@
-import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native';
-
+import { StyleSheet, Image, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -24,23 +23,32 @@ export default function TabTwoScreen() {
   const [users, setUsers] = useState<User[]>([]);
   const [gender, setGender] = useState<Gender>('');
   const [pageToGet, setPageToGet] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const getUsers = async (page: number) => {
+  const getUsers = async (page: number, gender: Gender) => {
+    setLoading(true);
+    const genderQuery = gender ? `&gender=${gender}` : '';
     const result = await fetch(
-      `${currentEnvironment.api.baseUrl}?results=5&gender=female&page=${String(page)}`,
+      `${currentEnvironment.api.baseUrl}?results=5&page=${page}${genderQuery}`
     );
-    const usersResults = (await result.json()) as User[];
+    const data = await result.json();
+    const usersResults = data.results as User[];
 
-    setUsers(oldUsers =>
-      page === 1 ? usersResults : [...oldUsers, ...usersResults],
-    );
+    setUsers(oldUsers => (page === 1 ? usersResults : [...oldUsers, ...usersResults]));
+    setLoading(false);
   };
 
   useEffect(() => {
-    void (async () => {
-      await getUsers(pageToGet);
+    (async () => {
+      await getUsers(pageToGet, gender);
     })();
-  }, []);
+  }, [pageToGet, gender]);
+
+  const handleGenderChange = (newGender: Gender) => {
+    setUsers([]);
+    setPageToGet(1);
+    setGender(newGender);
+  };
 
   return (
     <ParallaxScrollView
@@ -58,9 +66,7 @@ export default function TabTwoScreen() {
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <Checkbox
           value={gender === 'female'}
-          onValueChange={() => {
-            setGender('female');
-          }}
+          onValueChange={() => handleGenderChange('female')}
           color={gender === 'female' ? '#4630EB' : undefined}
         />
         <ThemedText>Female</ThemedText>
@@ -68,9 +74,7 @@ export default function TabTwoScreen() {
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <Checkbox
           value={gender === 'male'}
-          onValueChange={() => {
-            setGender('male');
-          }}
+          onValueChange={() => handleGenderChange('male')}
           color={gender === 'male' ? '#4630EB' : undefined}
         />
         <ThemedText>Male</ThemedText>
@@ -78,20 +82,22 @@ export default function TabTwoScreen() {
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <Checkbox
           value={gender === ''}
-          onValueChange={() => {
-            setGender('');
-          }}
+          onValueChange={() => handleGenderChange('')}
           color={gender === '' ? '#4630EB' : undefined}
         />
         <ThemedText>All</ThemedText>
       </View>
-      {users.length > 0
-        ? users.map((user: User) => (
-            <Text key={user.login.uuid} style={{ color: 'white' }}>
-              {user.name.first} {user.name.last} {user.gender}{' '}
-            </Text>
-          ))
-        : null}
+      {loading ? (
+        <ActivityIndicator size="large" color="#ffffff" />
+      ) : users.length > 0 ? (
+        users.map((user: User) => (
+          <Text key={user.login.uuid} style={{ color: 'black' }}>
+            {user.name.first} {user.name.last} {user.gender}
+          </Text>
+        ))
+      ) : (
+        <Text style={{ color: 'white' }}>No users found</Text>
+      )}
       <TouchableOpacity
         style={styles.loadMore}
         onPress={() => {
@@ -122,24 +128,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 8,
   },
-  loadMoree: {
+  loadMore: {
     backgroundColor: 'black',
     padding: 14,
     borderRadius: 6,
+    margin: 10,
   },
 });
-
-// 1. The logo spills out of its designated area.
-// 2. TEC theme is not displayed on the header bar instead a green color is seen.
-// 3. Users screen does not display any data.
-// 4. Load more button style is not working.
-// 5. Style issues are encountered on the page - style however you want.
-// 6. Additional data is not displayed upon using "Load more" button.
-// 7. Users are not filtered by gender and the list does not reset on change checkbox.
-// 8. No loading state is displayed when accessing "Users" component.
-// 9. On home page user should be able to do the following actions with cards that contain 2 fields: Title and Description
-//     - See all the cards already added
-//     - Add a card
-//     - Update a card
-//     - Delete a card
-// 10.Use the phone camera to take a picture and show it to the home screen.

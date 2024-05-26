@@ -3704,6 +3704,13 @@ expo-asset@~10.0.6:
     invariant "^2.2.4"
     md5-file "^3.2.3"
 
+expo-camera@^15.0.9:
+  version "15.0.9"
+  resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-15.0.9.tgz#a6a175638bdd9914aca061c6090001452329fcea"
+  integrity sha512-xH+y8gA/3rNLostIw+z4kDGA+AYzsI9+QYb7G1uCFyxr3SxUGhapz+oMBFDU++vmyo9G7Ax0n52nghqIrNBJxQ==
+  dependencies:
+    invariant "^2.2.4"
+
 expo-checkbox@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/expo-checkbox/-/expo-checkbox-3.0.0.tgz#73a5d60678dd4a1d2971b48957b08acf1dd734f1"
@@ -3758,6 +3765,11 @@ expo-modules-core@1.12.11:
   integrity sha512-CF5G6hZo/6uIUz6tj4dNRlvE5L4lakYukXPqz5ZHQ+6fLk1NQVZbRdpHjMkxO/QSBQcKUzG/ngeytpoJus7poQ==
   dependencies:
     invariant "^2.2.4"
+
+expo-permissions@^14.4.0:
+  version "14.4.0"
+  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-14.4.0.tgz#d7bb2f0026b87e1294ee551969c35306193f4ad3"
+  integrity sha512-oAcnJ7dlZhpBydK73cwomA2xofizayVUz+FW5REl7dMu7MYyeN/3aqhlpZ3mYddrxvG161bqu97MQr01UixUnw==
 
 expo-router@~3.5.11:
   version "3.5.14"
@@ -6542,7 +6554,7 @@ prompts@^2.0.1, prompts@^2.2.1, prompts@^2.3.2, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -6667,6 +6679,13 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
+react-native-camera@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-4.2.1.tgz#caf74081f055e89d7e9b0cd5108965d808c60e90"
+  integrity sha512-+Vkql24PFYQfsPRznJCvPwJQfyzCnjlcww/iZ4Ej80bgivKjL9eU0IMQIXp4yi6XCrKi4voWXxIDPMupQZKeIQ==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-native-gesture-handler@~2.16.1:
   version "2.16.2"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.16.2.tgz#032bd2a07334292d7f6cff1dc9d1ec928f72e26d"
@@ -6713,6 +6732,11 @@ react-native-screens@3.31.1:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-vision-camera@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-vision-camera/-/react-native-vision-camera-4.0.5.tgz#8dde4e742433206f9175d4bd4dcc09f863be4e6b"
+  integrity sha512-MaNQPnRLf6RfWOvhrPb+qiwhOAQIhtWhXJck6UU5Xj0ehoC3SsZjbdPZ39V5BD1KifK1n2YnuS0tzGw/zfrBzg==
 
 react-native-web@~0.19.10:
   version "0.19.12"
